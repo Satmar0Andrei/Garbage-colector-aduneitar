@@ -121,10 +121,10 @@
     <value>• Pentru a începe jocul, apăsați pe butonul "Play".
     ‣Se va deschide o fereastră cu jocul și veți putea controla mașina cu săgețile de pe tastatură.
 
-• Un conometru va porni și trebuie să mergeți pe hartă colectând gunoiul din fiecare tomberon.
+• Un cronometru va porni și trebuie să mergeți pe hartă colectând gunoiul din fiecare tomberon.
 
-• La final, se va afișa scorul dumneavoastră, calculat în funcție de timp
-.
+• La final, se va afișa scorul dumneavoastră, calculat în funcție de timp.
+
 </value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
