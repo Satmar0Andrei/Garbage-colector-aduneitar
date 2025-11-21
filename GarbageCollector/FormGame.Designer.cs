@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGame));
             this.pictureBoxCar = new System.Windows.Forms.PictureBox();
             this.labelScore = new System.Windows.Forms.Label();
             this.timerGenerateGarbage = new System.Windows.Forms.Timer(this.components);
@@ -40,7 +41,7 @@
             // pictureBoxCar
             // 
             this.pictureBoxCar.BackColor = System.Drawing.Color.Tan;
-            this.pictureBoxCar.Image = global::GarbageCollector.Properties.Resources.car3;
+            this.pictureBoxCar.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCar.Image")));
             this.pictureBoxCar.Location = new System.Drawing.Point(1, 1);
             this.pictureBoxCar.Name = "pictureBoxCar";
             this.pictureBoxCar.Size = new System.Drawing.Size(49, 49);
