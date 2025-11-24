@@ -41,17 +41,19 @@
             this.pnlFundal.BackColor = System.Drawing.Color.Honeydew;
             this.pnlFundal.Controls.Add(this.lblText);
             this.pnlFundal.Controls.Add(this.lblTitlu);
-            this.pnlFundal.Location = new System.Drawing.Point(29, 35);
+            this.pnlFundal.Location = new System.Drawing.Point(49, 53);
+            this.pnlFundal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlFundal.Name = "pnlFundal";
-            this.pnlFundal.Size = new System.Drawing.Size(562, 486);
+            this.pnlFundal.Size = new System.Drawing.Size(843, 748);
             this.pnlFundal.TabIndex = 0;
             // 
             // lblText
             // 
             this.lblText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblText.Location = new System.Drawing.Point(25, 92);
+            this.lblText.Location = new System.Drawing.Point(38, 140);
+            this.lblText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblText.Name = "lblText";
-            this.lblText.Size = new System.Drawing.Size(520, 340);
+            this.lblText.Size = new System.Drawing.Size(780, 523);
             this.lblText.TabIndex = 1;
             this.lblText.Text = resources.GetString("lblText.Text");
             this.lblText.Click += new System.EventHandler(this.lblText_Click);
@@ -60,9 +62,10 @@
             // 
             this.lblTitlu.AutoSize = true;
             this.lblTitlu.Font = new System.Drawing.Font("Trebuchet MS", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblTitlu.Location = new System.Drawing.Point(23, 35);
+            this.lblTitlu.Location = new System.Drawing.Point(34, 54);
+            this.lblTitlu.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitlu.Name = "lblTitlu";
-            this.lblTitlu.Size = new System.Drawing.Size(134, 40);
+            this.lblTitlu.Size = new System.Drawing.Size(201, 61);
             this.lblTitlu.TabIndex = 0;
             this.lblTitlu.Text = "Tutorial";
             // 
@@ -70,9 +73,10 @@
             // 
             this.btnExit.BackColor = System.Drawing.Color.Honeydew;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnExit.Location = new System.Drawing.Point(239, 527);
+            this.btnExit.Location = new System.Drawing.Point(358, 811);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(149, 67);
+            this.btnExit.Size = new System.Drawing.Size(224, 103);
             this.btnExit.TabIndex = 5;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = false;
@@ -80,13 +84,14 @@
             // 
             // Tutorial
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(634, 611);
+            this.ClientSize = new System.Drawing.Size(951, 940);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.pnlFundal);
             this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Tutorial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tutorial";

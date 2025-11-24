@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using Image = System.Drawing.Image;
 
 namespace GarbageCollector
@@ -15,11 +18,28 @@ namespace GarbageCollector
         private int[] dj = { 0, 2, 0, -2 };
         private Random random = new Random();
 
+        //private int[40] x ;
+        //private int[40] y;
+
         public FormGame()
         {
             InitializeComponent();
             pictureBoxCar.Size = new Size(49, 49);
         }
+
+        // Source - https://stackoverflow.com/a
+        // Posted by Salah Akbari, modified by community. See post 'Timeline' for change history
+        // Retrieved 2025-11-23, License - CC BY-SA 3.0
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (!msg.HWnd.Equals(Handle) &&
+                (keyData == Keys.Left || keyData == Keys.Right ||
+                 keyData == Keys.Up || keyData == Keys.Down))
+                return true;
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
 
         private void FormGame_Load(object sender, EventArgs e)
         {
@@ -30,8 +50,11 @@ namespace GarbageCollector
             PlaceRoad();
         }
 
+
+        bool enable = false;
         private void FormGame_KeyDown(object sender, KeyEventArgs e)
         {
+
             int x = pictureBoxCar.Location.Y / 50; 
             int y = pictureBoxCar.Location.X / 50;
 
@@ -41,6 +64,16 @@ namespace GarbageCollector
                 {
                     pictureBoxCar.Image = Image.FromFile("Images\\car4.png");
                     pictureBoxCar.Left -= carSpeed;
+
+                    if(pictureBoxCar.Location == gunoi.Location)
+                    {
+                        int randx = r.Next(2, 20);
+                        int randy = r.Next(2, 14);
+
+
+                       gunoi.Location = new Point(randx, randy);
+                    }
+
                 }
                 
             }
@@ -51,6 +84,15 @@ namespace GarbageCollector
                 {
                     pictureBoxCar.Image = Image.FromFile("Images\\car2.png");
                     pictureBoxCar.Left += carSpeed;
+
+                    if (pictureBoxCar.Location == gunoi.Location)
+                    {
+                        int randx = r.Next(2, 20);
+                        int randy = r.Next(2, 14);
+
+
+                        gunoi.Location = new Point(randx, randy);
+                    }
                 }
             }
 
@@ -60,6 +102,15 @@ namespace GarbageCollector
                 {
                     pictureBoxCar.Image = Image.FromFile("Images\\car1.png");
                     pictureBoxCar.Top -= carSpeed;
+
+                    if (pictureBoxCar.Location == gunoi.Location)
+                    {
+                        int randx = r.Next(2, 20);
+                        int randy = r.Next(2, 14);
+
+
+                        gunoi.Location = new Point(randx, randy);
+                    }
                 }
             }
 
@@ -69,6 +120,15 @@ namespace GarbageCollector
                 {
                     pictureBoxCar.Image = Image.FromFile("Images\\car3.png");
                     pictureBoxCar.Top += carSpeed;
+
+                    if (pictureBoxCar.Location == gunoi.Location)
+                    {
+                        int randx = r.Next(2, 20);
+                        int randy = r.Next(2, 14);
+
+
+                        gunoi.Location = new Point(randx, randy);
+                    }
                 }
             }
         }
@@ -95,7 +155,10 @@ namespace GarbageCollector
         }
         private void PlaceRoad()
         {
-            for(int i = 0; i < rows; i++)
+            //int cx = 1;
+            //int cy = 1;
+
+            for (int i = 0; i < rows; i++)
             {
                 for(int j = 0; j < cols; j++)
                 {
@@ -107,6 +170,13 @@ namespace GarbageCollector
                         picture.Size = new Size(50, 50);
                         picture.Location = new Point(j * 50, i * 50);
                         this.Controls.Add(picture);
+
+                        //adaugarea coordonatelor in vectori
+                        //x[cx] = 1;
+                        //y[cy] = 1;
+
+                        //cx++;
+                        //cy++;
                     }
                 }
             }
@@ -131,10 +201,61 @@ namespace GarbageCollector
             GenerateMaze(startX, startY, rows, cols);
         }
 
-
-        private void lblMenu_Click(object sender, EventArgs e)
+        private void nsbtnBackToMenu_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            TimerPrepare.Start();
+        }
+
+        int prepareTimeleft = 4;
+        int time = 90;
+
+        private void TimerPrepare_Tick(object sender, EventArgs e)
+        {
+            if(prepareTimeleft > 0)
+            {
+                string s = lblTimpRămas.Text;
+                lblTimpRămas.Text =s + "\n" + (prepareTimeleft - 1).ToString() + " secunde";
+                prepareTimeleft--;
+            }
+            if(prepareTimeleft == 0)
+            {
+                string s = "";
+                lblTimpRămas.Text = s + "Start!";
+
+                GarbageGenerator();
+
+                TimerPrepare.Stop();
+
+                TimerCollectGarbage.Start();
+                
+            }
+        }
+        private void TimerCollectGarbage_Tick(object sender, EventArgs e)
+        {
+            time--;
+            if(time > 0 && time <= 88)
+            {
+                string s = "Timp rămas: ";
+                if(time != 1)
+                {
+                    lblTimpRămas.Text = s + "\n" + (time - 1).ToString() + " secunde";
+                }
+                else
+                {
+                    lblTimpRămas.Text = s + "\n" + (time - 1).ToString() + " secundă";
+                }
+            }
+            if(time == 0)
+            {
+                string s = "";
+                lblTimpRămas.Text = "S-a terminat \n timpul!";
+                TimerCollectGarbage.Stop();
+            }
         }
 
         private void GenerateMaze(int x, int y, int rows, int cols)
@@ -195,6 +316,31 @@ namespace GarbageCollector
         private void StartLocation()
         {
             grid[0, 0] = grid[0, 1] = grid[1, 0] = grid[1, 1] = 1;
+        }
+
+
+        Random r = new Random();
+        PictureBox gunoi = new PictureBox();
+        private void GarbageGenerator()
+        {
+            int randx = r.Next(2, 20);
+            int randy = r.Next(2, 14);
+
+            if(grid[randx, randy] == 1)
+            {
+                
+                gunoi.BackColor = Color.Tan;
+                gunoi.Image = Image.FromFile("Images\\trashCan.png");
+                gunoi.SizeMode = PictureBoxSizeMode.StretchImage;
+                gunoi.Size = new Size(50, 50);
+                gunoi.Location = new Point(randx * 50, randy * 50);
+                this.Controls.Add(gunoi);
+                gunoi.BringToFront();
+            }
+            else
+            {
+                GarbageGenerator();
+            }
         }
     }
 }
