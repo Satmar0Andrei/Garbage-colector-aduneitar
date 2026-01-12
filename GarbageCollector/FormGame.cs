@@ -17,6 +17,8 @@ namespace GarbageCollector
         private int[] di = { -2, 0, 2, 0 };
         private int[] dj = { 0, 2, 0, -2 };
         private Random random = new Random();
+        private int gunoaieAD = 0;
+        private double punctajTotal = 0;
 
         //private int[40] x ;
         //private int[40] y;
@@ -24,22 +26,7 @@ namespace GarbageCollector
         public FormGame()
         {
             InitializeComponent();
-            pictureBoxCar.Size = new Size(49, 49);
         }
-
-        // Source - https://stackoverflow.com/a
-        // Posted by Salah Akbari, modified by community. See post 'Timeline' for change history
-        // Retrieved 2025-11-23, License - CC BY-SA 3.0
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (!msg.HWnd.Equals(Handle) &&
-                (keyData == Keys.Left || keyData == Keys.Right ||
-                 keyData == Keys.Up || keyData == Keys.Down))
-                return true;
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-
 
         private void FormGame_Load(object sender, EventArgs e)
         {
@@ -48,13 +35,25 @@ namespace GarbageCollector
             BreakRandomWalls(rows, cols, brokenWalls);
             PlaceBuildings();
             PlaceRoad();
+            lblPunctaj.Visible = false;
         }
 
+        private void VerifyGarbage()
+        {
+            if(pictureBoxGarbage.Location.X ==  pictureBoxCar.Location.X && pictureBoxCar.Location.Y == pictureBoxGarbage.Location.Y)
+            {
+                gunoaieAD++;
+                GarbageGenerator();
 
-        bool enable = false;
+                PointCalculator();
+
+                lblPunctaj.Text = punctajTotal.ToString();
+                lblPunctaj.Visible = true;
+            }
+        }
+
         private void FormGame_KeyDown(object sender, KeyEventArgs e)
         {
-
             int x = pictureBoxCar.Location.Y / 50; 
             int y = pictureBoxCar.Location.X / 50;
 
@@ -65,15 +64,7 @@ namespace GarbageCollector
                     pictureBoxCar.Image = Image.FromFile("Images\\car4.png");
                     pictureBoxCar.Left -= carSpeed;
 
-                    if(pictureBoxCar.Location == gunoi.Location)
-                    {
-                        int randx = r.Next(2, 20);
-                        int randy = r.Next(2, 14);
-
-
-                       gunoi.Location = new Point(randx, randy);
-                    }
-
+                    VerifyGarbage();
                 }
                 
             }
@@ -85,14 +76,7 @@ namespace GarbageCollector
                     pictureBoxCar.Image = Image.FromFile("Images\\car2.png");
                     pictureBoxCar.Left += carSpeed;
 
-                    if (pictureBoxCar.Location == gunoi.Location)
-                    {
-                        int randx = r.Next(2, 20);
-                        int randy = r.Next(2, 14);
-
-
-                        gunoi.Location = new Point(randx, randy);
-                    }
+                    VerifyGarbage();
                 }
             }
 
@@ -103,14 +87,7 @@ namespace GarbageCollector
                     pictureBoxCar.Image = Image.FromFile("Images\\car1.png");
                     pictureBoxCar.Top -= carSpeed;
 
-                    if (pictureBoxCar.Location == gunoi.Location)
-                    {
-                        int randx = r.Next(2, 20);
-                        int randy = r.Next(2, 14);
-
-
-                        gunoi.Location = new Point(randx, randy);
-                    }
+                    VerifyGarbage();
                 }
             }
 
@@ -121,14 +98,7 @@ namespace GarbageCollector
                     pictureBoxCar.Image = Image.FromFile("Images\\car3.png");
                     pictureBoxCar.Top += carSpeed;
 
-                    if (pictureBoxCar.Location == gunoi.Location)
-                    {
-                        int randx = r.Next(2, 20);
-                        int randy = r.Next(2, 14);
-
-
-                        gunoi.Location = new Point(randx, randy);
-                    }
+                    VerifyGarbage();
                 }
             }
         }
@@ -235,6 +205,12 @@ namespace GarbageCollector
                 
             }
         }
+
+        private void PointCalculator()
+        {
+            punctajTotal +=  (1.0)/ time * 1.0 * 100.0;
+        }
+
         private void TimerCollectGarbage_Tick(object sender, EventArgs e)
         {
             time--;
@@ -254,6 +230,7 @@ namespace GarbageCollector
             {
                 string s = "";
                 lblTimpRămas.Text = "S-a terminat \n timpul!";
+
                 TimerCollectGarbage.Stop();
             }
         }
@@ -320,7 +297,7 @@ namespace GarbageCollector
 
 
         Random r = new Random();
-        PictureBox gunoi = new PictureBox();
+
         private void GarbageGenerator()
         {
             int randx = r.Next(2, 20);
@@ -328,14 +305,9 @@ namespace GarbageCollector
 
             if(grid[randx, randy] == 1)
             {
-                
-                gunoi.BackColor = Color.Tan;
-                gunoi.Image = Image.FromFile("Images\\trashCan.png");
-                gunoi.SizeMode = PictureBoxSizeMode.StretchImage;
-                gunoi.Size = new Size(50, 50);
-                gunoi.Location = new Point(randx * 50, randy * 50);
-                this.Controls.Add(gunoi);
-                gunoi.BringToFront();
+                pictureBoxGarbage.Visible = true;
+                pictureBoxGarbage.Location = new Point(randx * 50, randy * 50);
+                pictureBoxGarbage.BringToFront();
             }
             else
             {
