@@ -50,7 +50,7 @@
             // 
             // pictureBoxCar
             // 
-            this.pictureBoxCar.BackColor = System.Drawing.Color.Tan;
+            this.pictureBoxCar.BackColor = System.Drawing.Color.Wheat;
             this.pictureBoxCar.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCar.Image")));
             this.pictureBoxCar.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxCar.Name = "pictureBoxCar";
@@ -61,7 +61,7 @@
             // 
             // labelScore
             // 
-            this.labelScore.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.labelScore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(203)))), ((int)(((byte)(71)))));
             this.labelScore.Location = new System.Drawing.Point(1048, -19);
             this.labelScore.Name = "labelScore";
             this.labelScore.Size = new System.Drawing.Size(199, 771);
@@ -101,7 +101,7 @@
             // 
             // pictureBoxGarbage
             // 
-            this.pictureBoxGarbage.BackColor = System.Drawing.Color.Tan;
+            this.pictureBoxGarbage.BackColor = System.Drawing.Color.Wheat;
             this.pictureBoxGarbage.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxGarbage.Image")));
             this.pictureBoxGarbage.Location = new System.Drawing.Point(227, 0);
             this.pictureBoxGarbage.Name = "pictureBoxGarbage";
@@ -144,7 +144,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(203)))), ((int)(((byte)(71)))));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.Location = new System.Drawing.Point(1074, 11);
             this.label1.Name = "label1";
@@ -155,7 +155,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(203)))), ((int)(((byte)(71)))));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label2.Location = new System.Drawing.Point(1074, 55);
             this.label2.Name = "label2";
@@ -210,6 +210,7 @@
             this.Controls.Add(this.pictureBoxCar);
             this.Controls.Add(this.labelScore);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "FormGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

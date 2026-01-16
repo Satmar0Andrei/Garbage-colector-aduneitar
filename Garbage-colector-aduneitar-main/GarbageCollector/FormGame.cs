@@ -21,9 +21,6 @@ namespace GarbageCollector
         private double punctajTotal = 0;
         private bool miscpos = false;
 
-        //private int[40] x ;
-        //private int[40] y;
-
         public FormGame()
         {
             InitializeComponent();
@@ -118,21 +115,20 @@ namespace GarbageCollector
                         Random random = new Random();
                         int number = random.Next(1, 13);
                         PictureBox building = new PictureBox();
-                        building.BackColor = Color.DarkSeaGreen;
-                        building.SizeMode = PictureBoxSizeMode.Zoom;
+                        building.BackColor = Color.FromArgb( 156, 203, 71);
+                        building.SizeMode = PictureBoxSizeMode.StretchImage;
                         building.Size = new Size(50, 50);
                         building.Location = new Point(j * 50, i * 50);
                         building.Image = Image.FromFile("Images\\house"+number.ToString()+".png");
                         this.Controls.Add(building);
+
+                   
                     }
                 }
             }
         }
         private void PlaceRoad()
         {
-            //int cx = 1;
-            //int cy = 1;
-
             for (int i = 0; i < rows; i++)
             {
                 for(int j = 0; j < cols; j++)
@@ -140,18 +136,11 @@ namespace GarbageCollector
                     if (grid[i, j] == 1)
                     {
                         PictureBox picture = new PictureBox();
-                        picture.BackColor = Color.Tan;
+                        picture.BackColor = Color.Wheat;
                         picture.SizeMode = PictureBoxSizeMode.StretchImage;
                         picture.Size = new Size(50, 50);
                         picture.Location = new Point(j * 50, i * 50);
                         this.Controls.Add(picture);
-
-                        //adaugarea coordonatelor in vectori
-                        //x[cx] = 1;
-                        //y[cy] = 1;
-
-                        //cx++;
-                        //cy++;
                     }
                 }
             }
@@ -185,6 +174,7 @@ namespace GarbageCollector
         {
             if(txtNume.Text != "")
             {
+                lblPunctaj.Text = "";
                 punctajTotal = 0;
                 lblTimpRămas.Visible = true;
                 lblTimpRămas.Text = "";
@@ -202,12 +192,21 @@ namespace GarbageCollector
 
         private void TimerPrepare_Tick(object sender, EventArgs e)
         {
-            if(prepareTimeleft > 0)
+            if (prepareTimeleft > 0)
             {
                 string s = lblTimpRămas.Text;
-                lblTimpRămas.Text =s + (prepareTimeleft - 1).ToString() + " secunde\n";
+
+                if(prepareTimeleft != 2)
+                {
+                    lblTimpRămas.Text = s + (prepareTimeleft - 1).ToString() + " secunde\n";
+                }
+                else
+                {
+                    lblTimpRămas.Text = s + (prepareTimeleft - 1).ToString() + " secunda\n";
+                }
                 prepareTimeleft--;
             }
+
             if(prepareTimeleft == 0)
             {
                 string s = "";
@@ -219,8 +218,7 @@ namespace GarbageCollector
 
                 TimerPrepare.Stop();
 
-                TimerCollectGarbage.Start();
-                
+                TimerCollectGarbage.Start();   
             }
         }
 
@@ -264,7 +262,6 @@ namespace GarbageCollector
                 prepareTimeleft = 4;
                 time = 90;
                 txtNume.Text = "";
-
             }
         }
 
@@ -318,6 +315,12 @@ namespace GarbageCollector
                     {
                         grid[x, y] = 1;
                         broken++;
+
+                        if (grid[x, y + 1] == -1 && grid[x + 1, y] == -1 && grid[x, y - 1] == -1 && grid[x - 1, y] == -1)
+                        {
+                            grid[x, y + 1] = 1;
+                            broken++;
+                        }
                     }
                 }
             }

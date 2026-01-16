@@ -35,5 +35,14 @@ namespace GarbageCollector
         {
             this.Close();
         }
+
+        private void btnCredits_Click(object sender, EventArgs e)
+        {
+            Credits Form = new Credits();
+
+            this.Hide();
+            Form.ShowDialog();
+            this.Show();
+        }
     }
 }

@@ -60,3 +60,4 @@ E:\satmarandreiixa\jocu jmecher\Garbage-colector-aduneitar-main\GarbageCollector
 E:\satmarandreiixa\jocu jmecher\Garbage-colector-aduneitar-main\GarbageCollector\bin\Debug\Images\truck1.jpg
 E:\satmarandreiixa\jocu jmecher\Garbage-colector-aduneitar-main\GarbageCollector\bin\Debug\GarbageCollector.exe
 E:\satmarandreiixa\jocu jmecher\Garbage-colector-aduneitar-main\GarbageCollector\bin\Debug\GarbageCollector.pdb
+E:\satmarandreiixa\jocu jmecher\Garbage-colector-aduneitar-main\GarbageCollector\obj\Debug\GarbageCollector.Credits.resources
